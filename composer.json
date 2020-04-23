@@ -1,7 +1,7 @@
 {
-    "name": "wolkkr/mysqli",
+    "name": "wolkkr/mydb",
     "description": "A simple php mysql query builder class",
-    "homepage": "https://github.com/WOLKkr/MySQLi",
+    "homepage": "https://github.com/WOLKkr/MyDB",
     "type": "library",
     "authors": [
         {
@@ -9,13 +9,11 @@
         }
     ],
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "require": {
         "php": ">=5.4.0"
     },
     "autoload": {
-        "classmap": [
-            "./"
-        ]
+        "files": ["MyDB.php"]
     }
 }
