@@ -1,101 +1,101 @@
-# YuanDB
+# MySQLi
 
-YuanDB 是我自己使用的一个mysql数据库查询的类。因为经常需要在一些脚本中使用，所以设计的目标就是代码精简，易用，无依赖。
+MySQLi - это класс, который я сам использую для запросов в базу данных mysql. Поскольку он часто требуется для использования в некоторых скриптах, цель разработки заключается в том, чтобы код был тонким и простым в использовании и без зависимостей.
 
-### 特点
+### Особенность
 
-- 代码精简。
-- 易用。
-- 无依赖。
+- Упрощение кода.
+- Простота в использовании.
+- Отсутствие зависимости.
 
-### 用法
+### Применение
 
-- 配置数据库
+- Конфигурация базы данных 
 
-可以配置多个数据库连接，默认使用default。
+Можно настроить несколько подключений к базе данных, по умолчанию используется значение default.
 
 ```php
 $db_config = [
 	"default" => [
-					"host" => "127.0.0.1",
-					"db" => "test",
-					"user" => "root",
-					"password" => "123456"
-				 ],
+		"host" => "127.0.0.1",
+		"db" => "test",
+		"user" => "root",
+		"password" => "123456"
+	 ],
 	"test" => [
-					"host" => "127.0.0.1",
-					"db" => "test",
-					"user" => "root",
-					"password" => "123456"
-				 ],
+		"host" => "127.0.0.1",
+		"db" => "test",
+		"user" => "root",
+		"password" => "123456"
+	 ],
 ];
 ```
 
-- 引入 YuanDB 或者直接复制代码
+- Подключение MySQLi
 
 ```php
-include 'YuanDB.php'
+include 'MySQLi.php'
 ```
 
 
 
-- 建立连接
+- Установка соединения
 
 ```php
-YuanDB::conn();   //默认default连接
-YuanDB::conn('test'); //使用test 连接
-YuanDB::conn(['host'=>'127.0.0.1','...']); //直接传一个连接配置
+MySQLi::conn();   // Соединение по умолчанию 'default'
+MySQLi::conn('test'); // Использование соединения 'test'
+MySQLi::conn(['host'=>'127.0.0.1','...']); // Прямая передача конфигурации соединения
 ```
 
-- 查询
+- Использование
 
 ```php
-$info = YuanDB::conn()->table('test_table')->where('id',1)->select('id,name')->first();
-$list = YuanDB::conn('test')->table('test_table')
+$info = MySQLi::conn()->table('test_table')->where('id',1)->select('id,name')->first();
+$list = MySQLi::conn('test')->table('test_table')
 							->where('id',1)
-    						->where('id=3')   //原生where 条件
+    						->where('id=3')   // Условия для 'where'
 							->where('id','!=',5)
-							->where('id',[1,2,3]) // in 查询条件
-							->orWhere('id',2) // or 查询
+							->where('id',[1,2,3]) // Условия запроса
+							->orWhere('id',2) // Проверка
 							->orderBy('id','desc')
 							->limit(10)
 							->get();
-$list = YuanDB::conn()->query("select * from t where id=?",[1]); //原生sql
-$count = YuanDB::conn()->table('test_table')->count(); //查询数量
+$list = MySQLi::conn()->query("select * from t where id=?",[1]); // Запрос sql
+$count = MySQLi::conn()->table('test_table')->count(); // Получить количество
 ```
 
-- 更新
+- Обновление
 
 ```php
-$rowCount = YuanDB::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
-$rowCount = YuanDB::conn()->table('test_table')->update(['name'=>'123'],1);
+$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
+$rowCount = MySQLi::conn()->table('test_table')->update(['name'=>'123'],1);
 ```
 
-- 删除
+- Удаление
 
 ```php
-$rowCount = YuanDB::conn()->table('test_table')->where('id',1)->delete(); 
-$rowCount = YuanDB::conn()->table('test_table')->delete(12);
+$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->delete(); 
+$rowCount = MySQLi::conn()->table('test_table')->delete(12);
 ```
 
-- 插入
+- Добавление
 
 ```php
-$insertId = YuanDB::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
+$insertId = MySQLi::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
 ```
 
-- 批量插入
+- Массовое добавление
 
 ```php
-$rowCount = YuanDB::conn()->table('test_table')->insert([
+$rowCount = MySQLi::conn()->table('test_table')->insert([
                                                         ['name'=>'abc','age'=>15],
                                                         ['name'=>'abc2','age'=>20],
                                                         ]);
 ```
 
-- 获取上次执行的sql
+- Получение последнего выполненого sql
 
 ```php
-echo YuanDB::conn()->getFullSql();
+echo MySQLi::conn()->getFullSql();
 ```
 
