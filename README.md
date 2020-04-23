@@ -14,6 +14,7 @@ MyDB - это класс, который я сам использую для з�
 
 Можно настроить несколько подключений к базе данных, по умолчанию используется значение default.
 
+- Файл конфигурации config.php
 ```php
 $db_config = [
 	"default" => [
@@ -31,13 +32,18 @@ $db_config = [
 ];
 ```
 
+- Установка
+
+```
+composer require wolkkr/mydb
+```
+
 - Подключение MyDB
 
 ```php
-include 'MyDB.php'
+include 'vendor/autoload.php';
+include 'config.php';
 ```
-
-
 
 - Установка соединения
 
@@ -62,12 +68,6 @@ $list = MyDB::conn('test')->table('test_table')
 							->get();
 $list = MyDB::conn()->query("select * from t where id=?",[1]); // Запрос sql
 $count = MyDB::conn()->table('test_table')->count(); // Получить количество
-```
-
-- Установка
-
-```
-composer require wolkkr/mydb
 ```
 
 - Обновление
