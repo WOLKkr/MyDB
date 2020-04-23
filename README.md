@@ -64,6 +64,12 @@ $list = MyDB::conn()->query("select * from t where id=?",[1]); // Запрос s
 $count = MyDB::conn()->table('test_table')->count(); // Получить количество
 ```
 
+- Установка
+
+```
+composer require wolkkr/mydb
+```
+
 - Обновление
 
 ```php
