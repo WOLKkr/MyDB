@@ -1,12 +1,16 @@
 {
-    "name": "lyuangg/yuandb",
+    "name": "WOLKkr/MySQLi",
     "description": "a simple php mysql query builder class",
+    "homepage": "https://github.com/WOLKkr/MySQLi",
     "type": "library",
     "version": "1.0",
     "authors": [
         {
             "name": "yuan",
             "email": "lyuangg@gmail.com"
+        },
+        {
+            "name": "WOLKkr"
         }
     ],
     "autoload": {
@@ -14,5 +18,7 @@
             "./"
         ]
     },
-    "require": {}
+    "require": {
+        "php": ">=5.4.0"
+    }
 }
