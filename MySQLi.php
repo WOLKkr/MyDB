@@ -2,20 +2,20 @@
 /*
 $db_config = [
 	"default" => [
-					"host" => "127.0.0.1",
-					"db" => "test",
-					"user" => "root",
-					"password" => "123456"
-				 ],
+		"host" => "127.0.0.1",
+		"db" => "test",
+		"user" => "root",
+		"password" => "123456"
+	 ],
 	"test" => [
-					"host" => "127.0.0.1",
-					"db" => "test",
-					"user" => "root",
-					"password" => "123456"
-				 ],
+		"host" => "127.0.0.1",
+		"db" => "test",
+		"user" => "root",
+		"password" => "123456"
+	 ],
 ];
-$info = YuanDB::conn()->table('test_table')->where('id',1)->select('id,name')->first();
-$list = YuanDB::conn('test')->table('test_table')
+$info = MySQLi::conn()->table('test_table')->where('id',1)->select('id,name')->first();
+$list = MySQLi::conn('test')->table('test_table')
 							->where('id',1)
 							->where('id','!=',5)
 							->where('id',[1,2,3])
@@ -23,15 +23,15 @@ $list = YuanDB::conn('test')->table('test_table')
 							->orderBy('id','desc')
 							->limit(10)
 							->get();
-$list = YuanDB::conn()->query("select * from t where id=?",[1]);
-$count = YuanDB::conn()->table('test_table')->count();
-$rowCount = YuanDB::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
-$rowCount = YuanDB::conn()->table('test_table')->where('id',1)->delete();
-$rowCount = YuanDB::conn()->table('test_table')->delete(12);
-$insertId = YuanDB::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
-echo YuanDB::conn()->getFullSql();
+$list = MySQLi::conn()->query("select * from t where id=?",[1]);
+$count = MySQLi::conn()->table('test_table')->count();
+$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
+$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->delete();
+$rowCount = MySQLi::conn()->table('test_table')->delete(12);
+$insertId = MySQLi::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
+echo MySQLi::conn()->getFullSql();
 */
-class YuanDB {
+class MySQLi {
 	private static $instances = [];
 	private $db, $table, $columns, $sql, $bindValues, $updateBindValues, $rowCount=0, $limit, $orderBy, $lastInsertId = 0, $conditions = [];
 	private function __construct($config) {
@@ -56,7 +56,7 @@ class YuanDB {
 		}
 		$config = isset($db_config[$connName]) ? $db_config[$connName] : $db_config;
 		if (!isset(static::$instances[$connName])) {
-			static::$instances[$connName] = new YuanDB($config);
+			static::$instances[$connName] = new MySQLi($config);
 		}
 		return static::$instances[$connName];
 	}
