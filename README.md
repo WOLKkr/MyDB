@@ -1,6 +1,6 @@
-# MySQLi
+# MyDB
 
-MySQLi - это класс, который я сам использую для запросов в базу данных mysql. Поскольку он часто требуется для использования в некоторых скриптах, цель разработки заключается в том, чтобы код был тонким и простым в использовании и без зависимостей.
+MyDB - это класс, который я сам использую для запросов в базу данных mysql. Поскольку он часто требуется для использования в некоторых скриптах, цель разработки заключается в том, чтобы код был тонким и простым в использовании и без зависимостей.
 
 ### Особенность
 
@@ -31,10 +31,10 @@ $db_config = [
 ];
 ```
 
-- Подключение MySQLi
+- Подключение MyDB
 
 ```php
-include 'MySQLi.php'
+include 'MyDB.php'
 ```
 
 
@@ -42,16 +42,16 @@ include 'MySQLi.php'
 - Установка соединения
 
 ```php
-MySQLi::conn();   // Соединение по умолчанию 'default'
-MySQLi::conn('test'); // Использование соединения 'test'
-MySQLi::conn(['host'=>'127.0.0.1','...']); // Прямая передача конфигурации соединения
+MyDB::conn();   // Соединение по умолчанию 'default'
+MyDB::conn('test'); // Использование соединения 'test'
+MyDB::conn(['host'=>'127.0.0.1','...']); // Прямая передача конфигурации соединения
 ```
 
 - Использование
 
 ```php
-$info = MySQLi::conn()->table('test_table')->where('id',1)->select('id,name')->first();
-$list = MySQLi::conn('test')->table('test_table')
+$info = MyDB::conn()->table('test_table')->where('id',1)->select('id,name')->first();
+$list = MyDB::conn('test')->table('test_table')
 							->where('id',1)
     						->where('id=3')   // Условия для 'where'
 							->where('id','!=',5)
@@ -60,34 +60,34 @@ $list = MySQLi::conn('test')->table('test_table')
 							->orderBy('id','desc')
 							->limit(10)
 							->get();
-$list = MySQLi::conn()->query("select * from t where id=?",[1]); // Запрос sql
-$count = MySQLi::conn()->table('test_table')->count(); // Получить количество
+$list = MyDB::conn()->query("select * from t where id=?",[1]); // Запрос sql
+$count = MyDB::conn()->table('test_table')->count(); // Получить количество
 ```
 
 - Обновление
 
 ```php
-$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
-$rowCount = MySQLi::conn()->table('test_table')->update(['name'=>'123'],1);
+$rowCount = MyDB::conn()->table('test_table')->where('id',1)->update(['name'=>'123']);
+$rowCount = MyDB::conn()->table('test_table')->update(['name'=>'123'],1);
 ```
 
 - Удаление
 
 ```php
-$rowCount = MySQLi::conn()->table('test_table')->where('id',1)->delete(); 
-$rowCount = MySQLi::conn()->table('test_table')->delete(12);
+$rowCount = MyDB::conn()->table('test_table')->where('id',1)->delete(); 
+$rowCount = MyDB::conn()->table('test_table')->delete(12);
 ```
 
 - Добавление
 
 ```php
-$insertId = MySQLi::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
+$insertId = MyDB::conn()->table('test_table')->insert(['name'=>'abc','age'=>15]);
 ```
 
 - Массовое добавление
 
 ```php
-$rowCount = MySQLi::conn()->table('test_table')->insert([
+$rowCount = MyDB::conn()->table('test_table')->insert([
                                                         ['name'=>'abc','age'=>15],
                                                         ['name'=>'abc2','age'=>20],
                                                         ]);
@@ -96,6 +96,6 @@ $rowCount = MySQLi::conn()->table('test_table')->insert([
 - Получение последнего выполненого sql
 
 ```php
-echo MySQLi::conn()->getFullSql();
+echo MyDB::conn()->getFullSql();
 ```
 
