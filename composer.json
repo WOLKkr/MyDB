@@ -2,6 +2,7 @@
     "name": "WOLKkr/MySQLi",
     "description": "a simple php mysql query builder class",
     "homepage": "https://github.com/WOLKkr/MySQLi",
+    "minimum-stability": "dev",
     "type": "library",
     "version": "1.0",
     "authors": [
