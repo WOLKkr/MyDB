@@ -1,25 +1,21 @@
 {
-    "name": "WOLKkr/MySQLi",
-    "description": "a simple php mysql query builder class",
+    "name": "wolkkr/mysqli",
+    "description": "A simple php mysql query builder class",
     "homepage": "https://github.com/WOLKkr/MySQLi",
-    "minimum-stability": "dev",
     "type": "library",
-    "version": "1.0",
     "authors": [
-        {
-            "name": "yuan",
-            "email": "lyuangg@gmail.com"
-        },
         {
             "name": "WOLKkr"
         }
     ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
     "autoload": {
         "classmap": [
             "./"
         ]
-    },
-    "require": {
-        "php": ">=5.4.0"
     }
 }
